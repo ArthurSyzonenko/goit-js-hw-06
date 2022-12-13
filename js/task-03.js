@@ -13,20 +13,13 @@ const images = [
   },
 ];
 
-const galleryListEl = document.querySelector(".gallery");
-galleryListEl.style.listStyle = "none"; /// добавив базовий стиль
+const galleryList = document.querySelector(".gallery");
 
-const makeGalleryImage = (images) => {
-  return images.map((image) => {
-    const galleryImageEl = document.createElement("li");
-    galleryImageEl.insertAdjacentHTML("afterbegin", "<img>");
-    galleryImageEl.firstChild.src = image.url;
-    galleryImageEl.firstChild.alt = image.alt;
-    galleryImageEl.firstChild.style.height = "250px";
-    return galleryImageEl;
-  });
-};
-
-const elements = makeGalleryImage(images);
-
-galleryListEl.append(...elements);
+const elements = images
+  .map(
+    ({ url, alt }) =>
+      `<li><img class='image' src='${url}' alt='${alt}' width='300'></li>`
+  )
+  .join("");
+console.log(elements);
+galleryList.insertAdjacentHTML("beforeend", elements);
